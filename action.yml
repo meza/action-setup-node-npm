@@ -36,7 +36,7 @@ runs:
     - uses: pat-s/always-upload-cache@v3.0.11
       name: Setup npm cache
       with:
-        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+        path: ${{ steps.npm-cache.outputs.npm_cache_dir }}
         key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}-${{ inputs.cache-name }}
         restore-keys: |
           ${{ runner.os }}-npm-cache-
