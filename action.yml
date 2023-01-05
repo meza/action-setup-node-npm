@@ -1,0 +1,45 @@
+name: "Setup node and install dependencies"
+description: "Takes care of the copy-pasta for the cache handling of npm"
+inputs:
+  cache-name:
+    description: "The name of the cache to use"
+    required: true
+  node-version:
+    description: "The version of node to use"
+    required: false
+    default: "latest"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Use Node.js ${{ inputs.node-version }}
+      uses: actions/setup-node@v3.5.1
+      with:
+        node-version: ${{ inputs.node-version }}
+
+    - name: Get npm cache directory
+      id: npm-cache
+      shell: bash
+      run: |
+        echo "npm_cache_dir=$(npm config get cache)" >> $GITHUB_OUTPUT
+
+    - name: Cache build helpers
+      id: cache-build-data
+      uses: pat-s/always-upload-cache@v3.0.11
+      if: always()
+      env:
+        cache-name: cache-build-data
+      with:
+        path: ./.cache
+        key: ${{ runner.os }}-build-data-${{ inputs.cache-name }}
+
+    - uses: pat-s/always-upload-cache@v3.0.11
+      name: Setup npm cache
+      with:
+        path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+        key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}-${{ inputs.cache-name }}
+        restore-keys: |
+          ${{ runner.os }}-npm-cache-
+
+    - run: npm install --frozen-lockfile
+      shell: bash
