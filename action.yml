@@ -1,6 +1,11 @@
 name: "Setup node and install dependencies"
 description: "Takes care of the copy-pasta for the cache handling of npm"
 inputs:
+  command:
+    description: "Which command to run when installing the dependencies? It will be appended to `npm ` Default: ci"
+    default: ci
+    required: false
+    type: string
   cache-name:
     description: "The name of the cache to use"
     required: true
@@ -41,5 +46,6 @@ runs:
         restore-keys: |
           ${{ runner.os }}-npm-cache-
 
-    - run: npm ci
+    - name: Installing Dependencies using npm ${{ inputs.command }}
+      run: npm ${{ inputs.command }}
       shell: bash
