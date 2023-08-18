@@ -45,7 +45,7 @@ runs:
         key: ${{ runner.os }}-npm-cache-${{ hashFiles('**/package-lock.json') }}-${{ inputs.cache-name }}
         restore-keys: |
           ${{ runner.os }}-npm-cache-
-     - uses: pat-s/always-upload-cache@v3.0.11
+    - uses: pat-s/always-upload-cache@v3.0.11
       name: Setup node_modules cache
       id: modules
       with:
