@@ -55,6 +55,5 @@ runs:
           ${{ runner.os }}-node_modules-
 
     - name: Installing Dependencies using npm ${{ inputs.command }}
-      if: steps.modules.outputs.cache-hit != 'true'
       run: npm ${{ inputs.command }}
       shell: bash
