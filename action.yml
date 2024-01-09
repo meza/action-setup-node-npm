@@ -2,8 +2,8 @@ name: "Setup node and install dependencies"
 description: "Takes care of the copy-pasta for the cache handling of npm"
 inputs:
   command:
-    description: "Which command to run when installing the dependencies? It will be appended to `npm ` Default: ci"
-    default: ci
+    description: "Which command to run when installing the dependencies? It will be appended to `npm ` Default: install --no-audit --no-fund"
+    default: install --no-audit --no-fund
     required: false
     type: string
   cache-name:
