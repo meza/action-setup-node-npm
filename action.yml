@@ -42,5 +42,4 @@ runs:
 
     - name: Installing Dependencies using npm ${{ inputs.command }}
       run: npm ${{ inputs.command }}
-      if: steps.modules.outputs.cache-hit != 'true'
       shell: bash
