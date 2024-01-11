@@ -36,7 +36,7 @@ runs:
       id: modules
       with:
         path: ./node_modules
-        key: ${{ runner.os }}-node_modules-${{ inputs.cache-name }}-${{ hashFiles('**/package-*.json') }}
+        key: ${{ runner.os }}-node_modules-${{ inputs.cache-name }}-${{ hashFiles('**/package*.json') }}
         restore-keys: |
           ${{ runner.os }}-node_modules-
 
