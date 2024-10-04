@@ -7,7 +7,8 @@ inputs:
     required: false
   cache-name:
     description: "The name of the cache to use"
-    required: true
+    required: false
+    default: 'npm'
 
 outputs:
     cache-hit:
