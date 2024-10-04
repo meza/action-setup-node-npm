@@ -5,7 +5,6 @@ inputs:
     description: "Which command to run when installing the dependencies? It will be appended to `npm ` Default: install --no-audit --no-fund"
     default: install --no-audit --no-fund
     required: false
-    type: string
   cache-name:
     description: "The name of the cache to use"
     required: true
