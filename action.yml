@@ -7,13 +7,23 @@ inputs:
     required: false
   cache-name:
     description: "The name of the cache to use"
-    required: true
+    required: false
+    default: 'npm'
+
+outputs:
+    cache-hit:
+        description: "A boolean value to indicate if a cache was hit."
+        value: ${{ steps.node.outputs.cache-hit }}
+    node-version:
+        description: "The installed node version."
+        value: ${{ steps.node.outputs.node-version }}
 
 runs:
   using: "composite"
   steps:
-    - name: Use Node.js ${{ inputs.node-version }}
+    - name: Use Node.js
       uses: actions/setup-node@v4.0.4
+      id: node
       with:
         node-version-file: package.json
         cache: 'npm'
